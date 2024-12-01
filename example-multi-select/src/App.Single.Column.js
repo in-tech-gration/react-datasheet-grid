@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
-import { DataSheetGrid, keyColumn, intColumn } from "react-datasheet-grid";
+import { DataSheetGrid } from "react-datasheet-grid";
 import Select from "react-select";
 import "react-datasheet-grid/dist/style.css";
 
@@ -84,32 +84,29 @@ const selectColumn = (options) => ({
 });
 
 export default function App() {
-  const [data, setData] = useState([
-    { flavor: "chocolate", quantity: 3 },
-    { flavor: "strawberry", quantity: 5 },
-    { flavor: null, quantity: null },
-  ]);
+
+  const [data, setData] = useState(["chocolate", null]);
   console.log("Datasheet state", data);
 
-  const columns = [
-    {
-      ...keyColumn(
-        "flavor",
-        selectColumn({
-          choices: [
-            { value: "chocolate", label: "Chocolate" },
-            { value: "strawberry", label: "Strawberry" },
-            { value: "vanilla", label: "Vanilla" },
-          ],
-        })
-      ),
-      title: "Flavor",
-    },
-    {
-      ...keyColumn("quantity", intColumn),
-      title: "Quantity",
-    },
-  ];
-
-  return <DataSheetGrid value={data} onChange={setData} columns={columns} />;
+  return (
+    <>
+      <p>Open the console to see the Datasheet state object as it gets updated.</p>
+      <DataSheetGrid
+        value={data}
+        onChange={setData}
+        columns={[
+          {
+            ...selectColumn({
+              choices: [
+                { value: "chocolate", label: "Chocolate" },
+                { value: "strawberry", label: "Strawberry" },
+                { value: "vanilla", label: "Vanilla" },
+              ],
+            }),
+            title: "Flavor",
+          },
+        ]}
+      />
+    </>
+  );
 }
