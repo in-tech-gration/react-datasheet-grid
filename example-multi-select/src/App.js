@@ -84,24 +84,29 @@ const selectColumn = (options) => ({
 });
 
 export default function App() {
+
   const [data, setData] = useState(["chocolate", null]);
+  console.log("Datasheet state", data);
 
   return (
-    <DataSheetGrid
-      value={data}
-      onChange={setData}
-      columns={[
-        {
-          ...selectColumn({
-            choices: [
-              { value: "chocolate", label: "Chocolate" },
-              { value: "strawberry", label: "Strawberry" },
-              { value: "vanilla", label: "Vanilla" },
-            ],
-          }),
-          title: "Flavor",
-        },
-      ]}
-    />
+    <>
+      <p>Open the console to see the Datasheet state object as it gets updated.</p>
+      <DataSheetGrid
+        value={data}
+        onChange={setData}
+        columns={[
+          {
+            ...selectColumn({
+              choices: [
+                { value: "chocolate", label: "Chocolate" },
+                { value: "strawberry", label: "Strawberry" },
+                { value: "vanilla", label: "Vanilla" },
+              ],
+            }),
+            title: "Flavor",
+          },
+        ]}
+      />
+    </>
   );
 }
